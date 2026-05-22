@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeForge — Online Compiler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-logo">CF</div>
+      <div class="brand-text">
+        <span class="brand-name">CodeForge</span>
+        <span class="brand-sub">Online Compiler</span>
+      </div>
+    </div>
+    <div class="nav-center">
+      <div class="lang-tabs">
+        <button class="lang-tab active" data-lang="python" onclick="switchLang('python')">Python</button>
+        <button class="lang-tab" data-lang="c" onclick="switchLang('c')">C</button>
+        <button class="lang-tab" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+        <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn-ghost" onclick="openPanel('files')">Files</button>
+      <button class="btn-ghost" onclick="openPanel('history')">History</button>
+      <button class="btn-save" onclick="showSave()">Save</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="layout">
+
+    <!-- EDITOR SIDE -->
+    <div class="editor-side">
+      <div class="editor-bar">
+        <div class="file-info">
+          <span class="lang-badge" id="langBadge">PY</span>
+          <input type="text" id="fileName" class="file-name" placeholder="untitled"/>
+        </div>
+        <div class="editor-actions">
+          <button class="btn-reset" onclick="resetCode()">Reset</button>
+          <button class="btn-run" id="runBtn" onclick="runCode()">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="2,1 13,7 2,13"/></svg>
+            Run
+          </button>
+        </div>
+      </div>
+      <div id="editor" class="editor-wrap"></div>
+      <div class="stdin-wrap">
+        <div class="stdin-label">STDIN &nbsp;<span class="stdin-hint">— type program input here before running</span></div>
+        <textarea id="stdin" class="stdin-area" placeholder="e.g. John&#10;25&#10;Hello"></textarea>
+      </div>
+    </div>
+
+    <!-- OUTPUT SIDE -->
+    <div class="output-side">
+      <div class="output-bar">
+        <span class="output-title">OUTPUT</span>
+        <div class="output-meta" id="outputMeta"></div>
+        <button class="btn-copy" onclick="copyOut()">Copy</button>
+      </div>
+      <div class="output-body" id="outputBody">
+        <div class="output-idle">
+          <div class="idle-icon">&#9654;</div>
+          <p>Hit <strong>Run</strong> to execute your code</p>
+          <p class="idle-tip">Ctrl + Enter to run quickly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+  <div class="panel" id="panel">
+    <div class="panel-head">
+      <span id="panelTitle">Files</span>
+      <button class="panel-close" onclick="closePanel()">&#10005;</button>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+  </div>
+
+  <!-- SAVE MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeSave(event)">
+    <div class="modal">
+      <div class="modal-head">
+        <span>Save File</span>
+        <button onclick="closeSave()" class="panel-close">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Title</label>
+        <input type="text" id="saveTitle" class="modal-input" placeholder="My awesome code"/>
+        <label class="modal-label">Language</label>
+        <input type="text" id="saveLang" class="modal-input" readonly/>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-ghost" onclick="closeSave()">Cancel</button>
+        <button class="btn-save" onclick="doSave()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
