@@ -284,3 +284,26 @@ cd frontend && npx serve .
 ```
 
 Then open the browser at the frontend URL. Done!
+
+Team Project
+Developed collaboratively as a team project.
+
+Contributors
+Vedant Vinchurkar
+Komal Rathod
+
+## Vedant Vinchurkar
+
+- Worked on backend APIs using Node.js and Express
+- Assisted in MongoDB database integration
+- Assisted in authentication and login functionality
+- Helped in testing and debugging
+
+
+## Komal Rathod
+
+Worked on frontend UI using React
+- Created responsive pages and components
+- Integrated frontend with backend APIs
+-Implemented authentication routes
+- Tested API endpoints and fixed bugs
